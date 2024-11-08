@@ -29,6 +29,6 @@ server:
   ssl:
     enabled: true
     key-store: classpath:keystore.p12
-    key-store-password: P@55w0rd
+    key-store-password: P@55w0rd #externalize in CI/CD pipeline
     key-store-type: PKCS12
     key-alias: vestrapay
