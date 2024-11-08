@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+          - id: portal
+            uri: ${BACKEND:http://localhost:5334}
+            predicates:
+              - Path=/portal/**
+
+          - id: gateway
+            uri: ${GATEWAY:http://localhost:5335}
+            predicates:
+              - Path=/gateway/**
+
+          - id: auditlog
+            uri: ${AUDIT:http://localhost:8082}
+            predicates:
+              - Path=/auditlog/**
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+
+server:
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-store-password: P@55w0rd
+    key-store-type: PKCS12
+    key-alias: vestrapay

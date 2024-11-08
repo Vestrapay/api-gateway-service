@@ -1,0 +1,12 @@
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+COPY target/api-gateway-0.0.1-SNAPSHOT.jar app.jar
+ENV BACKEND=http://172.31.24.231:5334
+ENV GATEWAY=http://172.31.24.231:5335
+ENV AUDIT=http://172.31.24.231:8082
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","app.jar"]
